@@ -1,0 +1,19 @@
+databases:
+  - name: rails-blog
+    databaseName: blog_production_wxs3
+    user: blog_production_wxs3_user
+    password: D8EZX9D8FI2k9MP4CxdYSC45tDk2LY3v
+
+services:
+  - type: web
+    name: rails-blog
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: postgres://blog_production_wxs3_user:D8EZX9D8FI2k9MP4CxdYSC45tDk2LY3v@dpg-cdf7kuda4992md45c70g-a/blog_production_wxs3
+        fromDatabase:
+          name: rails-blog
+          property: connectionString
+      - key: 71a6630f85064421346ab88b2e1f440f
+        sync: false
